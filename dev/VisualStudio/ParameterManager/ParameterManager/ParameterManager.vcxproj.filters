@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ParameterManager">
+      <UniqueIdentifier>{57c9b6f9-569a-49a4-9beb-3c9e09605908}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ParameterManager\config">
+      <UniqueIdentifier>{4234ffd1-013a-465f-b177-0b4559c759c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ParameterManager\config\freertos">
+      <UniqueIdentifier>{e7e5528f-d405-46e2-9eee-7da29b673ef7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ParameterManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\AeroKernel\AeroKernel\parameter.cpp">
+      <Filter>ParameterManager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\AeroKernel\AeroKernel\parameter.hpp">
+      <Filter>ParameterManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AeroKernel\AeroKernel\config\freertos\FreeRTOSConfig.h">
+      <Filter>ParameterManager\config\freertos</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

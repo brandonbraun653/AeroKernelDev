@@ -1,0 +1,9 @@
+[submodule "AeroKernel"]
+	path = AeroKernel
+	url = https://github.com/brandonbraun653/AeroKernel.git
+[submodule "lib/spdlog"]
+	path = lib/spdlog
+	url = https://github.com/gabime/spdlog.git
+[submodule "lib/FreeRTOS"]
+	path = lib/FreeRTOS
+	url = https://github.com/brandonbraun653/FreeRTOS.git
