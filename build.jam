@@ -1,0 +1,8 @@
+
+path-constant AeroInclude : ./AeroKernel ;
+
+explicit_alias CORE 
+    :   /AERO_KERNEL//ParameterManager 
+        /AERO_KERNEL//EventManager
+        /AERO_KERNEL//LogManager
+    ;

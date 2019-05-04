@@ -1,0 +1,33 @@
+import os ;
+import feature ;
+import lib/CommonTools/boost-build/toolset/gcc_arm_none_eabi ;
+
+rule explicit_alias ( name : sources * : requirements * : default-build * : usage-requirements * )
+    {
+    alias $(name) : $(sources) : $(requirements) : $(default-build) : $(usage-requirements) ;
+    explicit $(name) ;
+    }
+
+path-constant TOP : . ;
+path-constant COMMON_FEATURES : lib/CommonTools/boost-build/features ;
+
+use-project /PRJ : . ;
+use-project /AERO_KERNEL : AeroKernel ; 
+
+local boost_install_dir = [ os.environ BOOST_ROOT ] ;
+path-constant boost_inc_dir : $(boost_install_dir)/boost_1_68_0 ;
+path-constant artifacts_dir : $(TOP)/artifacts ;
+
+# ------------------------------------------
+# /PRJ//XXXX Aliases
+# ------------------------------------------
+explicit_alias BOOST : : : : <include>$(boost_inc_dir) ;
+explicit_alias FreeRTOS_CFG : : : : <include>AeroKernel/AeroKernel/config/freertos ;
+
+project AeroKernelDevelopment
+    : requirements
+        <link>static
+        <toolset>gcc_arm_none_eabi:<cxxflags>--std=gnu++17
+        <toolset>gcc:<cxxflags>--std=gnu++17
+        <toolset>msvc:<cxxflags>"/std:c++17"
+    ;
