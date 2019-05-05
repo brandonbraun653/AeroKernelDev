@@ -13,6 +13,8 @@ path-constant COMMON_FEATURES : lib/CommonTools/boost-build/features ;
 
 use-project /PRJ : . ;
 use-project /AERO_KERNEL : AeroKernel ; 
+use-project /GTEST : lib/CommonTools/googletest ;
+use-project /GMOCK : lib/CommonTools/googletest ;
 
 local boost_install_dir = [ os.environ BOOST_ROOT ] ;
 path-constant boost_inc_dir : $(boost_install_dir)/boost_1_68_0 ;

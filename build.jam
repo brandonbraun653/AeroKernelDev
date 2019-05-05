@@ -6,3 +6,17 @@ explicit_alias CORE
         /AERO_KERNEL//EventManager
         /AERO_KERNEL//LogManager
     ;
+
+# -----------------------------------------------
+# Test Executables 
+# -----------------------------------------------
+exe AeroKernelTests
+    :   tst/main.cpp
+        tst/mod/test_parameter.cpp
+        /GTEST//gtest_core
+
+    :   <toolset>gcc:<cxxflags>"-fprofile-arcs -ftest-coverage"
+        <toolset>gcc:<linkflags>"-lgcov --coverage"
+    ;
+
+# TODO: Need to get the thing to generate debug information for each compiler type.

@@ -1,0 +1,18 @@
+import option ;
+import toolset ;
+
+using msvc ;
+
+toolset.flags msvc.compile CFLAGS <variant>release : "/GL /arch:SSE2 /fp:fast" : unchecked ;
+toolset.flags msvc.compile CFLAGS <variant>debug : "/DEBUG" : unchecked ;
+toolset.flags msvc.archive AROPTIONS <variant>release/<link>static : "/LTCG" : unchecked ;
+toolset.flags msvc.link LINKFLAGS <variant>release/<link>shared : "/LTCG /OPT:REF /OPT:ICF" : unchecked ;
+
+option.set keep-going : false ;
+
+using gcc ;
+
+# toolset.flags gcc.compile CFLAGS <variant>debug : ""
+
+
+# using gcc_arm_none_eabi : ;
