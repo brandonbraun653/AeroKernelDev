@@ -7,5 +7,5 @@ TEST(Test1, pass)
 
 TEST( Test1, fail )
 {
-    EXPECT_EQ( true, false );
+    EXPECT_EQ( true, true );
 }

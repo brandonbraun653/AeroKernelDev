@@ -1,5 +1,7 @@
+import common ;
 
 path-constant AeroInclude : ./AeroKernel ;
+path-constant CoverageDir : $(TOP)/artifacts/coverage ;
 
 explicit_alias CORE 
     :   /AERO_KERNEL//ParameterManager 
@@ -8,15 +10,47 @@ explicit_alias CORE
     ;
 
 # -----------------------------------------------
-# Test Executables 
+# Test Executable
 # -----------------------------------------------
 exe AeroKernelTests
     :   tst/main.cpp
-        tst/mod/test_parameter.cpp
+        [ glob tst/mod/*.cpp ] 
         /GTEST//gtest_core
+        CORE
 
-    :   <toolset>gcc:<cxxflags>"-fprofile-arcs -ftest-coverage"
-        <toolset>gcc:<linkflags>"-lgcov --coverage"
+    :   <include>$(AeroInclude)
+        <toolset>gcc
+        <variant>debug
+        <linkflags>"-lgcov"
     ;
+    
+# -----------------------------------------------
+# Target that will generate the coverage report
+# -----------------------------------------------
+explicit_alias coverage : CovReports : : <toolset>gcc <variant>debug ;
 
-# TODO: Need to get the thing to generate debug information for each compiler type.
+# -----------------------------------------------
+# Build the coverage report from coverage files, both XML and HTML format
+# -----------------------------------------------
+make CovReports : CoverageGeneration : @build_coverage ;
+actions quietly build_coverage
+{
+    mkdir $(CoverageDir)
+    gcovr -j $(parallel_threads) -e lib/ -r . --html-title AeroKernelCoverage --html-details -o $(CoverageDir)/cov.html
+    gcovr -j $(parallel_threads) -e lib/ -r . -x -o $(CoverageDir)/cov.xml
+}
+
+# -----------------------------------------------
+# Run the executable that will generate the appropriate coverage files
+# -----------------------------------------------
+make CoverageGeneration : CoverageExecutable : @generate_coverage ;
+actions generate_coverage
+{
+    echo Running $(>) to generate coverage...
+    $(>)
+}
+
+# -----------------------------------------------
+# Builds the raw coverage executable
+# -----------------------------------------------
+explicit_alias CoverageExecutable : AeroKernelTests ;

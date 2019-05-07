@@ -20,6 +20,8 @@ local boost_install_dir = [ os.environ BOOST_ROOT ] ;
 path-constant boost_inc_dir : $(boost_install_dir)/boost_1_68_0 ;
 path-constant artifacts_dir : $(TOP)/artifacts ;
 
+parallel_threads = 8 ;
+
 # ------------------------------------------
 # /PRJ//XXXX Aliases
 # ------------------------------------------
@@ -32,4 +34,6 @@ project AeroKernelDevelopment
         <toolset>gcc_arm_none_eabi:<cxxflags>--std=gnu++17
         <toolset>gcc:<cxxflags>--std=gnu++17
         <toolset>msvc:<cxxflags>"/std:c++17"
+
+    :   default-build debug
     ;
