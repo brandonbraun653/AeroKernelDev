@@ -1,6 +1,7 @@
 import common ;
 
 path-constant AeroInclude : ./AeroKernel ;
+path-constant ArtifactDir : $(TOP)/artifacts ;
 path-constant CoverageDir : $(TOP)/artifacts/coverage ;
 
 explicit_alias CORE 
@@ -35,9 +36,10 @@ explicit_alias coverage : CovReports : : <toolset>gcc <variant>debug ;
 make CovReports : CoverageGeneration : @build_coverage ;
 actions quietly build_coverage
 {
+    mkdir $(ArtifactDir)
     mkdir $(CoverageDir)
-    gcovr -j $(parallel_threads) -e lib/ -r . --html-title AeroKernelCoverage --html-details -o $(CoverageDir)/cov.html
-    gcovr -j $(parallel_threads) -e lib/ -r . -x -o $(CoverageDir)/cov.xml
+    gcovr -e lib/ -r . --html-title AeroKernelCoverage --html-details -o $(CoverageDir)/cov.html
+    gcovr -e lib/ -r . -x -o $(CoverageDir)/cov.xml
 }
 
 # -----------------------------------------------
