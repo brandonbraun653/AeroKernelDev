@@ -24,6 +24,11 @@ exe AeroKernelTests
         <variant>debug
         <linkflags>"-lgcov"
     ;
+
+# -----------------------------------------------
+# Target that will execute the tests
+# -----------------------------------------------
+explicit_alias tests : RunTests ;
     
 # -----------------------------------------------
 # Target that will generate the coverage report
@@ -33,7 +38,7 @@ explicit_alias coverage : CovReports : : <toolset>gcc <variant>debug ;
 # -----------------------------------------------
 # Build the coverage report from coverage files, both XML and HTML format
 # -----------------------------------------------
-make CovReports : CoverageGeneration : @build_coverage ;
+make CovReports : RunTests : @build_coverage ;
 actions quietly build_coverage
 {
     mkdir $(ArtifactDir)
@@ -45,7 +50,7 @@ actions quietly build_coverage
 # -----------------------------------------------
 # Run the executable that will generate the appropriate coverage files
 # -----------------------------------------------
-make CoverageGeneration : CoverageExecutable : @generate_coverage ;
+make RunTests : TestExecutable : @generate_coverage ;
 actions generate_coverage
 {
     echo Running $(>) to generate coverage...
@@ -55,4 +60,4 @@ actions generate_coverage
 # -----------------------------------------------
 # Builds the raw coverage executable
 # -----------------------------------------------
-explicit_alias CoverageExecutable : AeroKernelTests ;
+explicit_alias TestExecutable : AeroKernelTests ;
