@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ParameterManager>
+  <req>
+    <number>PM001</number>
+    <description>The system shall provide a method for default initialization</description>
+  </req>
+  <req>
+    <number>PM002</number>
+    <R>true</R>
+    <description>The system shall provide a method for registering a new parameter</description>
+    <req>
+      <number>PM002.1</number>
+      <R>true</R>
+      <description>Registration shall require an identifier for allowing access to privileged commands</description>
+    </req>
+    <req>
+      <number>PM002.2</number>
+      <R>true</R>
+      <description>Parameter registration shall allow the following meta configuration bitfield data to be set</description>
+      <req>
+        <number>PM002.2.1</number>
+        <R>false</R>
+        <description>AccessControl: If set, only allows the registrator to update the data. Otherwise anyone can update it.</description>
+      </req>
+      <req>
+        <number>PM002.2.2</number>
+        <R>false</R>
+        <description>ConstantData: If set, assumed to be constant. Otherwise, assumed to be periodically updated.</description>
+      </req>
+      <req>
+        <number>PM002.2.3</number>
+        <R>false</R>
+        <description>StorageLocation: 3-bit wide field indicating which kind of memory the data is stored in</description>
+        <req>
+          <number>None</number>
+          <R>false</R>
+          <description>InternalSRAM: 000</description>
+        </req>
+        <req>
+          <number>None</number>
+          <R>false</R>
+          <description>InternalFlash: 001</description>
+        </req>
+        <req>
+          <number>None</number>
+          <R>false</R>
+          <description>ExternalFlash0: 010</description>
+        </req>
+        <req>
+          <number>None</number>
+          <R>false</R>
+          <description>ExternalFlash1: 011</description>
+        </req>
+        <req>
+          <number>None</number>
+          <R>false</R>
+          <description>ExternalFlash2: 100</description>
+        </req>
+        <req>
+          <number>None</number>
+          <R>false</R>
+          <description>ExternalSRAM0: 101</description>
+        </req>
+        <req>
+          <number>None</number>
+          <R>false</R>
+          <description>ExternalSRAM1: 110</description>
+        </req>
+        <req>
+          <number>None</number>
+          <R>false</R>
+          <description>ExternalSRAM2: 111</description>
+        </req>
+      </req>
+      <req>
+        <number>PM002.2.3</number>
+        <R>false</R>
+        <description></description>
+      </req>
+    </req>
+    <req>
+      <number>PM002.3</number>
+      <R>true</R>
+      <description>Registration shall require a callback function that refreshes/updates the registered parameter</description>
+    </req>
+  </req>
+  <req>
+    <number>PM003</number>
+    <description>The system shall provide a method to determine if a parameter is registered</description>
+  </req>
+  <header>
+    <headerTitle>Data Access</headerTitle>
+    <req>
+      <number>PM004</number>
+      <description>The system shall provide a method for atomically reading a registered parameter</description>
+    </req>
+    <req>
+      <number>PM005</number>
+      <description>The system shall provide a method for atomically writing a registered parameter</description>
+    </req>
+    <req>
+      <number>PM006</number>
+      <description>The system shall provide a method for atomically removing a registered parameter</description>
+    </req>
+  </header>
+  <header>
+    <headerTitle>Memory Management<headerTitle>
+    <req>
+      <number>PM007</number>
+      <description>The system shall be initialized from static memory</description>
+    </req>
+    <req>
+      <number>PM008</number>
+      <description>The system shall provide a method for determining at runtime the amount of memory remaining in a given storage region</description>
+    </req>
+    <req>
+      <number>PM009</number>
+      <description>The system shall be initialized with information regarding accessable memory</description>
+    </req>
+    <req>
+      <number>PM010</number>
+      <description>The system shall be capable of registering and unregistering low level memory storage access functions</description>
+    </req>
+    <req>
+      <number>PM011</number>
+      <description>The system shall align memory according to a specific block size</description>
+      <req>
+        <number>PM011.1</number>
+        <R>true</R>
+        <description>If a parameter exceeds the allocated block size, it will consume the entire next block</description>
+      </req><req>
+        <number>PM011.2</number>
+        <R>true</R>
+        <description>Parameter blocks shall be tracked with a header data structure</description>
+      </req>
+    </req>
+  </header>
+</ParameterManager>
