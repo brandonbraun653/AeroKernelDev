@@ -1,6 +1,7 @@
 import common ;
 
 path-constant AeroInclude : ./AeroKernel ;
+path-constant AeroTestInclude : ./tst ;
 path-constant ArtifactDir : $(TOP)/artifacts ;
 path-constant CoverageDir : $(TOP)/artifacts/coverage ;
 
@@ -16,13 +17,20 @@ explicit_alias CORE
 exe AeroKernelTests
     :   tst/main.cpp
         [ glob tst/mod/*.cpp ] 
-        /GTEST//gtest_core
+        [ glob tst/fixtures/*.cpp ]
         CORE
+        /GTEST//gtest_core
+        /CHIMERA//CORE
 
     :   <include>$(AeroInclude)
+        <include>$(AeroTestInclude)
         <toolset>gcc
         <variant>debug
         <linkflags>"-lgcov"
+        <ChimeraBackend>Sim
+
+        <use>/SPARSEPP//PUB
+        <use>/CHIMERA//PUB
     ;
 
 # -----------------------------------------------

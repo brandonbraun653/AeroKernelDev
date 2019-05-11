@@ -12,9 +12,12 @@ path-constant TOP : . ;
 path-constant COMMON_FEATURES : lib/CommonTools/boost-build/features ;
 
 use-project /PRJ : . ;
-use-project /AERO_KERNEL : AeroKernel ; 
+use-project /AERO_KERNEL : AeroKernel ;
+use-project /CHIMERA : lib/Chimera ;
+use-project /FREERTOS : lib/FreeRTOS ;
 use-project /GTEST : lib/CommonTools/googletest ;
 use-project /GMOCK : lib/CommonTools/googletest ;
+use-project /SPARSEPP : lib/sparsepp ;
 
 local boost_install_dir = [ os.environ BOOST_ROOT ] ;
 path-constant boost_inc_dir : $(boost_install_dir)/boost_1_68_0 ;
@@ -27,13 +30,18 @@ parallel_threads = 8 ;
 # ------------------------------------------
 explicit_alias BOOST : : : : <include>$(boost_inc_dir) ;
 explicit_alias FreeRTOS_CFG : : : : <include>AeroKernel/AeroKernel/config/freertos ;
+explicit_alias CHIMERA_PORT : : : : <include>lib/Chimera/Chimera/modules/sim ;
+explicit_alias CHIMERA_DEFS ;
 
 project AeroKernelDevelopment
     : requirements
         <link>static
         <toolset>gcc_arm_none_eabi:<cxxflags>--std=gnu++17
-        <toolset>gcc:<cxxflags>--std=gnu++17
+        <toolset>gcc:<cxxflags>"--std=gnu++17"
         <toolset>msvc:<cxxflags>"/std:c++17"
+        <define>CHIMERA_LITTLE_ENDIAN
+        <Chimera>enabled
+        <FreeRTOS>disabled
 
     :   default-build debug
     ;
