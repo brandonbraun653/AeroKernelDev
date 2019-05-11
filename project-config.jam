@@ -4,4 +4,4 @@ import toolset ;
 toolset.flags msvc.compile CFLAGS <variant>debug : "/DEBUG" : unchecked ;
 option.set keep-going : false ;
 
-using gcc ;
+using gcc : 8 ;

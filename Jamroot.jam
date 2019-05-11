@@ -20,7 +20,8 @@ use-project /GMOCK : lib/CommonTools/googletest ;
 use-project /SPARSEPP : lib/sparsepp ;
 
 local boost_install_dir = [ os.environ BOOST_ROOT ] ;
-path-constant boost_inc_dir : $(boost_install_dir)/boost_1_68_0 ;
+path-constant boost_inc_dir : $(boost_install_dir)/boost_1_70_0 ;
+path-constant boost_lib_dir : $(boost_install_dir)/boost_1_70_0/stage/lib ;
 path-constant artifacts_dir : $(TOP)/artifacts ;
 
 parallel_threads = 8 ;
@@ -28,7 +29,7 @@ parallel_threads = 8 ;
 # ------------------------------------------
 # /PRJ//XXXX Aliases
 # ------------------------------------------
-explicit_alias BOOST : : : : <include>$(boost_inc_dir) ;
+explicit_alias BOOST : : : : <include>$(boost_inc_dir) <linkflags>"-L$(boost_lib_dir)" ;
 explicit_alias FreeRTOS_CFG : : : : <include>AeroKernel/AeroKernel/config/freertos ;
 explicit_alias CHIMERA_PORT : : : : <include>lib/Chimera/Chimera/modules/sim ;
 explicit_alias CHIMERA_DEFS ;
