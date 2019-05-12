@@ -37,7 +37,7 @@ explicit_alias CHIMERA_DEFS ;
 project AeroKernelDevelopment
     : requirements
         <link>static
-        <toolset>gcc_arm_none_eabi:<cxxflags>--std=gnu++17
+        <toolset>gcc_arm_none_eabi:<cxxflags>"--std=gnu++17 -mcpu=cortex-m4"
         <toolset>gcc:<cxxflags>"--std=gnu++17"
         <toolset>msvc:<cxxflags>"/std:c++17"
         <define>CHIMERA_LITTLE_ENDIAN

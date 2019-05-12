@@ -18,6 +18,10 @@
 
 class PMTF : public ::testing::Test
 {
+public:
+  static constexpr uint8_t updateValue1 = 0x33;
+  bool updateProc1(const std::string_view &key);
+
 protected:
   virtual void SetUp() override
   {
@@ -58,8 +62,5 @@ extern Chimera::Modules::Memory::VMD_sPtr ExternalFLASH2_VMD;
 extern Chimera::Modules::Memory::VMD_sPtr ExternalSRAM0_VMD;
 extern Chimera::Modules::Memory::VMD_sPtr ExternalSRAM1_VMD;
 extern Chimera::Modules::Memory::VMD_sPtr ExternalSRAM2_VMD;
-
-
-
 
 #endif /* !PARAMETER_MANAGER_TEST_FIXTURE_HPP */
