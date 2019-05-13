@@ -49,19 +49,29 @@ TEST_F( PMTF, RegistrationOverwrite )
   ------------------------------------------------*/
   pm->registerParameter( key, ctrlBlk1 );
   auto storedResult = pm->getControlBlock( key );
-  EXPECT_EQ( memcmp( &ctrlBlk1, &storedResult, sizeof( ParamCtrlBlk ) ), 0 );
+
+  /* Cannot memcmp due to implementation details */
+  EXPECT_EQ( ctrlBlk1.address, storedResult.address );
+  EXPECT_EQ( ctrlBlk1.config, storedResult.config );
+  EXPECT_EQ( ctrlBlk1.size, storedResult.size );
 
   /*------------------------------------------------
   Re-register the key and write the second control block
   ------------------------------------------------*/
   pm->registerParameter( key, ctrlBlk2 );
   storedResult = pm->getControlBlock( key );
-  EXPECT_EQ( memcmp( &ctrlBlk2, &storedResult, sizeof( ParamCtrlBlk ) ), 0 );
+  
+  /* Cannot memcmp due to implementation details */
+  EXPECT_EQ( ctrlBlk2.address, storedResult.address );
+  EXPECT_EQ( ctrlBlk2.config, storedResult.config );
+  EXPECT_EQ( ctrlBlk2.size, storedResult.size );
 
   /*------------------------------------------------
   Make sure the current control block does not equal the first
   ------------------------------------------------*/
-  EXPECT_FALSE( memcmp( &ctrlBlk1, &pm->getControlBlock( key ), sizeof( ParamCtrlBlk ) ) == 0 );
+  EXPECT_NE( ctrlBlk1.address, storedResult.address );
+  EXPECT_NE( ctrlBlk1.config, storedResult.config );
+  EXPECT_NE( ctrlBlk1.size, storedResult.size );
 }
 
 TEST_F( PMTF, RegistrationBeforeInit )

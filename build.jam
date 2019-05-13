@@ -1,4 +1,5 @@
 import common ;
+import toolset ;
 
 path-constant AeroInclude : ./AeroKernel ;
 path-constant AeroTestInclude : ./tst ;
@@ -24,8 +25,6 @@ exe AeroKernelTests
 
     :   <include>$(AeroInclude)
         <include>$(AeroTestInclude)
-        <toolset>gcc
-        <variant>debug
         <linkflags>"-lgcov"
         <ChimeraBackend>Sim
 
@@ -58,10 +57,10 @@ actions quietly build_coverage
 # -----------------------------------------------
 # Run the executable that will generate the appropriate coverage files
 # -----------------------------------------------
-make RunTests : TestExecutable : @generate_coverage ;
-actions generate_coverage
+make RunTests : TestExecutable : @run_tests ;
+actions run_tests
 {
-    echo Running $(>) to generate coverage...
+    echo Running $(>)
     $(>)
 }
 
