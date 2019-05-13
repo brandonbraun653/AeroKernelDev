@@ -16,3 +16,9 @@
 [submodule "lib/sparsepp"]
 	path = lib/sparsepp
 	url = https://github.com/brandonbraun653/sparsepp.git
+[submodule "lib/Thor"]
+	path = lib/Thor
+	url = https://github.com/brandonbraun653/Thor.git
+[submodule "lib/stm32hal_f4"]
+	path = lib/stm32hal_f4
+	url = https://github.com/brandonbraun653/STM32HAL_F4.git
