@@ -133,6 +133,12 @@
     <Filter Include="Tests\F-RAM">
       <UniqueIdentifier>{e93ca0bd-80e7-41bb-9238-63337761ae6f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ParameterManager">
+      <UniqueIdentifier>{a9559ce9-9389-4ced-afa9-bf31d0c6b3b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MB85RS64V">
+      <UniqueIdentifier>{c5b3003a-a591-4f45-9a42-d17a3a111009}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="stm32.props">
@@ -950,6 +956,12 @@
     <ClCompile Include="..\..\..\..\tst\int\embedded\ParameterManager\F-RAM\fram_test.cpp">
       <Filter>Tests\F-RAM</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\AeroKernel\AeroKernel\parameter.cpp">
+      <Filter>ParameterManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\lib\MB85RS64V\mb85rs64v.cpp">
+      <Filter>MB85RS64V</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\buffer.hpp">
@@ -1260,6 +1272,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\lib\Thor\Thor\types\usart_types.hpp">
       <Filter>Thor\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\AeroKernel\AeroKernel\parameter.hpp">
+      <Filter>ParameterManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\lib\MB85RS64V\mb85rs64v.hpp">
+      <Filter>MB85RS64V</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

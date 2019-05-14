@@ -22,3 +22,6 @@
 [submodule "lib/stm32hal_f4"]
 	path = lib/stm32hal_f4
 	url = https://github.com/brandonbraun653/STM32HAL_F4.git
+[submodule "lib/MB85RS64V"]
+	path = lib/MB85RS64V
+	url = https://github.com/brandonbraun653/MB85RS64V.git

@@ -41,9 +41,9 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:/ProgramFiles/boost/boost_1_68_0;$(ProjectDir)../../../../lib/Thor;$(ProjectDir)../../../../lib/Thor/Thor/config/freertos;$(ProjectDir)../../../../lib/Thor/Thor/config/chimera;$(ProjectDir)../../../../lib/stm32hal_f4/Device/include;$(ProjectDir)../../../../lib/stm32hal_f4/Device/sys;$(ProjectDir)../../../../lib/stm32hal_f4/Device/cmsis/core/include;$(ProjectDir)../../../../lib/stm32hal_f4/STM32F4xx_HAL_Driver/Inc;$(ProjectDir)../../../../lib/FreeRTOS/portable/GCC/ARM_CM4F;$(ProjectDir)../../../../lib/FreeRTOS/include;$(ProjectDir)../../../../lib/Chimera;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:/ProgramFiles/boost/boost_1_68_0;$(ProjectDir)../../../../AeroKernel;$(ProjectDir)../../../../lib/Thor;$(ProjectDir)../../../../lib/Thor/Thor/config/freertos;$(ProjectDir)../../../../lib/Thor/Thor/config/chimera;$(ProjectDir)../../../../lib/stm32hal_f4/Device/include;$(ProjectDir)../../../../lib/stm32hal_f4/Device/sys;$(ProjectDir)../../../../lib/stm32hal_f4/Device/cmsis/core/include;$(ProjectDir)../../../../lib/stm32hal_f4/STM32F4xx_HAL_Driver/Inc;$(ProjectDir)../../../../lib/FreeRTOS/portable/GCC/ARM_CM4F;$(ProjectDir)../../../../lib/FreeRTOS/include;$(ProjectDir)../../../../lib/Chimera;$(ProjectDir)../../../../lib/MB85RS54V;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(ClCompile.PreprocessorDefinitions);DEBUG=1;STM32F446xx;BOOST_NO_EXCEPTIONS;NOMINMAX;CHIMERA_LITTLE_ENDIAN;USE_FULL_LL_DRIVER;USING_FREERTOS;USE_FREERTOS</PreprocessorDefinitions>
-      <CPPLanguageStandard>GNUPP14</CPPLanguageStandard>
+      <CPPLanguageStandard>CPP1Z</CPPLanguageStandard>
       <SupportExceptions>false</SupportExceptions>
       <SupportRTTI>false</SupportRTTI>
     </ClCompile>
@@ -53,9 +53,9 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:/ProgramFiles/boost/boost_1_68_0;$(ProjectDir)../../../../lib/Thor;$(ProjectDir)../../../../lib/Thor/Thor/config/freertos;$(ProjectDir)../../../../lib/Thor/Thor/config/chimera;$(ProjectDir)../../../../lib/stm32hal_f4/Device/include;$(ProjectDir)../../../../lib/stm32hal_f4/Device/sys;$(ProjectDir)../../../../lib/stm32hal_f4/Device/cmsis/core/include;$(ProjectDir)../../../../lib/stm32hal_f4/STM32F4xx_HAL_Driver/Inc;$(ProjectDir)../../../../lib/FreeRTOS/portable/GCC/ARM_CM4F;$(ProjectDir)../../../../lib/FreeRTOS/include;$(ProjectDir)../../../../lib/Chimera;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:/ProgramFiles/boost/boost_1_68_0;$(ProjectDir)../../../../AeroKernel;$(ProjectDir)../../../../lib/Thor;$(ProjectDir)../../../../lib/Thor/Thor/config/freertos;$(ProjectDir)../../../../lib/Thor/Thor/config/chimera;$(ProjectDir)../../../../lib/stm32hal_f4/Device/include;$(ProjectDir)../../../../lib/stm32hal_f4/Device/sys;$(ProjectDir)../../../../lib/stm32hal_f4/Device/cmsis/core/include;$(ProjectDir)../../../../lib/stm32hal_f4/STM32F4xx_HAL_Driver/Inc;$(ProjectDir)../../../../lib/FreeRTOS/portable/GCC/ARM_CM4F;$(ProjectDir)../../../../lib/FreeRTOS/include;$(ProjectDir)../../../../lib/Chimera;$(ProjectDir)../../../../lib/MB85RS54V;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(ClCompile.PreprocessorDefinitions);NDEBUG=1;RELEASE=1;STM32F446xx;BOOST_NO_EXCEPTIONS;NOMINMAX;CHIMERA_LITTLE_ENDIAN;USE_FULL_LL_DRIVER;USING_FREERTOS;USE_FREERTOS</PreprocessorDefinitions>
-      <CPPLanguageStandard>GNUPP14</CPPLanguageStandard>
+      <CPPLanguageStandard>CPP1Z</CPPLanguageStandard>
       <SupportExceptions>false</SupportExceptions>
       <SupportRTTI>false</SupportRTTI>
     </ClCompile>
@@ -67,6 +67,8 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\AeroKernel\AeroKernel\parameter.cpp" />
+    <ClCompile Include="..\..\..\..\lib\MB85RS64V\mb85rs64v.cpp" />
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\defaults\serial_defaults.cpp" />
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\defaults\spi_defaults.cpp" />
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\sram.cpp" />
@@ -107,6 +109,7 @@
     <ClInclude Include="$(EFP_BASE)\Profiler\DebuggerChecker.h" />
     <ClInclude Include="$(TESTFW_BASE_LOCAL)\com.sysprogs.unittest.tinyembtest\TinyEmbeddedTest.h" />
     <ClInclude Include="$(TESTFW_BASE_LOCAL)\com.sysprogs.unittest.tinyembtest\SysprogsTestHooks.h" />
+    <ClInclude Include="..\..\..\..\AeroKernel\AeroKernel\parameter.hpp" />
     <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\buffer.hpp" />
     <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\chimera.hpp" />
     <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\crc.hpp" />
@@ -167,6 +170,7 @@
     <ClInclude Include="..\..\..\..\lib\FreeRTOS\include\task.h" />
     <ClInclude Include="..\..\..\..\lib\FreeRTOS\include\timers.h" />
     <ClInclude Include="..\..\..\..\lib\FreeRTOS\portable\GCC\ARM_CM4F\portmacro.h" />
+    <ClInclude Include="..\..\..\..\lib\MB85RS64V\mb85rs64v.hpp" />
     <ClInclude Include="..\..\..\..\lib\Thor\Thor\allocator.hpp" />
     <ClInclude Include="..\..\..\..\lib\Thor\Thor\boostStub.hpp" />
     <ClInclude Include="..\..\..\..\lib\Thor\Thor\config.hpp" />
