@@ -139,6 +139,9 @@
     <Filter Include="MB85RS64V">
       <UniqueIdentifier>{c5b3003a-a591-4f45-9a42-d17a3a111009}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MB85RS64V\tests">
+      <UniqueIdentifier>{47e115cf-d10c-4ba1-b20b-ed200aadd1c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="stm32.props">
@@ -953,14 +956,14 @@
     <ClCompile Include="..\..\..\..\tst\int\embedded\ParameterManager\main.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\tst\int\embedded\ParameterManager\F-RAM\fram_test.cpp">
-      <Filter>Tests\F-RAM</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\AeroKernel\AeroKernel\parameter.cpp">
       <Filter>ParameterManager</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\lib\MB85RS64V\mb85rs64v.cpp">
       <Filter>MB85RS64V</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\lib\MB85RS64V\tests\mb85rs64v_tests_stm32f4.cpp">
+      <Filter>MB85RS64V\tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -41,7 +41,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:/ProgramFiles/boost/boost_1_68_0;$(ProjectDir)../../../../AeroKernel;$(ProjectDir)../../../../lib/Thor;$(ProjectDir)../../../../lib/Thor/Thor/config/freertos;$(ProjectDir)../../../../lib/Thor/Thor/config/chimera;$(ProjectDir)../../../../lib/stm32hal_f4/Device/include;$(ProjectDir)../../../../lib/stm32hal_f4/Device/sys;$(ProjectDir)../../../../lib/stm32hal_f4/Device/cmsis/core/include;$(ProjectDir)../../../../lib/stm32hal_f4/STM32F4xx_HAL_Driver/Inc;$(ProjectDir)../../../../lib/FreeRTOS/portable/GCC/ARM_CM4F;$(ProjectDir)../../../../lib/FreeRTOS/include;$(ProjectDir)../../../../lib/Chimera;$(ProjectDir)../../../../lib/MB85RS54V;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:/ProgramFiles/boost/boost_1_68_0;$(ProjectDir)../../../../AeroKernel;$(ProjectDir)../../../../lib/Thor;$(ProjectDir)../../../../lib/Thor/Thor/config/freertos;$(ProjectDir)../../../../lib/Thor/Thor/config/chimera;$(ProjectDir)../../../../lib/stm32hal_f4/Device/include;$(ProjectDir)../../../../lib/stm32hal_f4/Device/sys;$(ProjectDir)../../../../lib/stm32hal_f4/Device/cmsis/core/include;$(ProjectDir)../../../../lib/stm32hal_f4/STM32F4xx_HAL_Driver/Inc;$(ProjectDir)../../../../lib/FreeRTOS/portable/GCC/ARM_CM4F;$(ProjectDir)../../../../lib/FreeRTOS/include;$(ProjectDir)../../../../lib/Chimera;$(ProjectDir)../../../../lib/sparsepp;$(ProjectDir)../../../../lib/MB85RS64V;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(ClCompile.PreprocessorDefinitions);DEBUG=1;STM32F446xx;BOOST_NO_EXCEPTIONS;NOMINMAX;CHIMERA_LITTLE_ENDIAN;USE_FULL_LL_DRIVER;USING_FREERTOS;USE_FREERTOS</PreprocessorDefinitions>
       <CPPLanguageStandard>CPP1Z</CPPLanguageStandard>
       <SupportExceptions>false</SupportExceptions>
@@ -53,7 +53,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:/ProgramFiles/boost/boost_1_68_0;$(ProjectDir)../../../../AeroKernel;$(ProjectDir)../../../../lib/Thor;$(ProjectDir)../../../../lib/Thor/Thor/config/freertos;$(ProjectDir)../../../../lib/Thor/Thor/config/chimera;$(ProjectDir)../../../../lib/stm32hal_f4/Device/include;$(ProjectDir)../../../../lib/stm32hal_f4/Device/sys;$(ProjectDir)../../../../lib/stm32hal_f4/Device/cmsis/core/include;$(ProjectDir)../../../../lib/stm32hal_f4/STM32F4xx_HAL_Driver/Inc;$(ProjectDir)../../../../lib/FreeRTOS/portable/GCC/ARM_CM4F;$(ProjectDir)../../../../lib/FreeRTOS/include;$(ProjectDir)../../../../lib/Chimera;$(ProjectDir)../../../../lib/MB85RS54V;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:/ProgramFiles/boost/boost_1_68_0;$(ProjectDir)../../../../AeroKernel;$(ProjectDir)../../../../lib/Thor;$(ProjectDir)../../../../lib/Thor/Thor/config/freertos;$(ProjectDir)../../../../lib/Thor/Thor/config/chimera;$(ProjectDir)../../../../lib/stm32hal_f4/Device/include;$(ProjectDir)../../../../lib/stm32hal_f4/Device/sys;$(ProjectDir)../../../../lib/stm32hal_f4/Device/cmsis/core/include;$(ProjectDir)../../../../lib/stm32hal_f4/STM32F4xx_HAL_Driver/Inc;$(ProjectDir)../../../../lib/FreeRTOS/portable/GCC/ARM_CM4F;$(ProjectDir)../../../../lib/FreeRTOS/include;$(ProjectDir)../../../../lib/Chimera;$(ProjectDir)../../../../lib/sparsepp;$(ProjectDir)../../../../lib/MB85RS64V;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(ClCompile.PreprocessorDefinitions);NDEBUG=1;RELEASE=1;STM32F446xx;BOOST_NO_EXCEPTIONS;NOMINMAX;CHIMERA_LITTLE_ENDIAN;USE_FULL_LL_DRIVER;USING_FREERTOS;USE_FREERTOS</PreprocessorDefinitions>
       <CPPLanguageStandard>CPP1Z</CPPLanguageStandard>
       <SupportExceptions>false</SupportExceptions>
@@ -69,6 +69,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\AeroKernel\AeroKernel\parameter.cpp" />
     <ClCompile Include="..\..\..\..\lib\MB85RS64V\mb85rs64v.cpp" />
+    <ClCompile Include="..\..\..\..\lib\MB85RS64V\tests\mb85rs64v_tests_stm32f4.cpp" />
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\defaults\serial_defaults.cpp" />
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\defaults\spi_defaults.cpp" />
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\sram.cpp" />
@@ -91,7 +92,6 @@
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\thor_uart.cpp" />
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\thor_usart.cpp" />
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\thor_watchdog.cpp" />
-    <ClCompile Include="..\..\..\..\tst\int\embedded\ParameterManager\F-RAM\fram_test.cpp" />
     <ClCompile Include="..\..\..\..\tst\int\embedded\ParameterManager\main.cpp" />
     <ClCompile Include="C:\Users\brand\AppData\Local\VisualGDB\EmbeddedEFPs\Profiler\ProfilerDriver_STM32_HAL.cpp" />
     <None Include="stm32.props" />
