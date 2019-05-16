@@ -884,9 +884,6 @@
     <ClCompile Include="..\..\..\..\lib\FreeRTOS\portable\MemMang\heap_4.c">
       <Filter>FreeRTOS\portable\MemMang</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\brand\AppData\Local\VisualGDB\EmbeddedEFPs\Profiler\ProfilerDriver_STM32_HAL.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\sram.cpp">
       <Filter>Thor</Filter>
     </ClCompile>
@@ -964,6 +961,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\lib\MB85RS64V\tests\mb85rs64v_tests_stm32f4.cpp">
       <Filter>MB85RS64V\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Valkyrie\AppData\Local\VisualGDB\EmbeddedEFPs\Profiler\ProfilerDriver_STM32_HAL.cpp">
+      <Filter>Source files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -93,7 +93,7 @@
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\thor_usart.cpp" />
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\thor_watchdog.cpp" />
     <ClCompile Include="..\..\..\..\tst\int\embedded\ParameterManager\main.cpp" />
-    <ClCompile Include="C:\Users\brand\AppData\Local\VisualGDB\EmbeddedEFPs\Profiler\ProfilerDriver_STM32_HAL.cpp" />
+    <ClCompile Include="C:\Users\Valkyrie\AppData\Local\VisualGDB\EmbeddedEFPs\Profiler\ProfilerDriver_STM32_HAL.cpp" />
     <None Include="stm32.props" />
     <ClCompile Include="$(EFP_BASE)\Profiler\FastSemihosting.cpp" />
     <ClCompile Include="$(EFP_BASE)\Profiler\SamplingProfiler.cpp" />
