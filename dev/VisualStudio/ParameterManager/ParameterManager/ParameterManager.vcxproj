@@ -37,6 +37,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\AeroKernel\AeroKernel\parameter.cpp" />
+    <ClCompile Include="..\..\..\..\lib\Chimera\Chimera\chimera.cpp" />
+    <ClCompile Include="..\..\..\..\lib\Chimera\Chimera\chimera_allocator.cpp" />
+    <ClCompile Include="..\..\..\..\lib\Chimera\Chimera\chimera_buffer.cpp" />
+    <ClCompile Include="..\..\..\..\lib\Chimera\Chimera\chimera_crc.cpp" />
+    <ClCompile Include="..\..\..\..\lib\Chimera\Chimera\chimera_exception.cpp" />
+    <ClCompile Include="..\..\..\..\lib\Chimera\Chimera\chimera_logging.cpp" />
+    <ClCompile Include="..\..\..\..\lib\Chimera\Chimera\chimera_threading.cpp" />
     <ClCompile Include="..\..\..\..\lib\Chimera\Chimera\modules\memory\chimera_memory_device.cpp" />
     <ClCompile Include="..\..\..\..\tst\fixtures\parameter_test_fixture.cpp" />
     <ClCompile Include="..\..\..\..\tst\main.cpp" />
@@ -44,6 +51,25 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\AeroKernel\AeroKernel\parameter.hpp" />
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\allocator.hpp" />
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\buffer.hpp" />
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\chimera.hpp" />
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\crc.hpp" />
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\dma.hpp" />
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\exception.hpp" />
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\gpio.hpp" />
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\logging.hpp" />
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\memory.hpp" />
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\modules\memory\blockDevice.hpp" />
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\modules\memory\device.hpp" />
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\power.hpp" />
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\preprocessor.hpp" />
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\serial.hpp" />
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\spi.hpp" />
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\system.hpp" />
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\threading.hpp" />
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\utilities.hpp" />
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\watchdog.hpp" />
     <ClInclude Include="..\..\..\..\tst\fixtures\parameter_test_fixture.hpp" />
   </ItemGroup>
   <ItemDefinitionGroup />
@@ -61,12 +87,13 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)../../../../AeroKernel;$(ProjectDir)../../../../lib/Chimera;$(ProjectDir)../../../../lib/sparsepp;$(ProjectDir)../../../../tst;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BOOST_ROOT)/boost_1_68_0;$(ProjectDir)../../../../AeroKernel;$(ProjectDir)../../../../lib/Chimera/Chimera/modules/sim;$(ProjectDir)../../../../lib/Chimera;$(ProjectDir)../../../../lib/sparsepp;$(ProjectDir)../../../../tst;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(BOOST_ROOT)/boost_1_68_0/stage/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -79,12 +106,13 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)../../../../AeroKernel;$(ProjectDir)../../../../lib/Chimera;$(ProjectDir)../../../../lib/sparsepp;$(ProjectDir)../../../../tst;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BOOST_ROOT)/boost_1_68_0;$(ProjectDir)../../../../AeroKernel;$(ProjectDir)../../../../lib/Chimera/Chimera/modules/sim;$(ProjectDir)../../../../lib/Chimera;$(ProjectDir)../../../../lib/sparsepp;$(ProjectDir)../../../../tst;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(BOOST_ROOT)/boost_1_68_0/stage/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -96,7 +124,7 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)../../../../AeroKernel;$(ProjectDir)../../../../lib/Chimera;$(ProjectDir)../../../../lib/sparsepp;$(ProjectDir)../../../../tst;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BOOST_ROOT)/boost_1_68_0;$(ProjectDir)../../../../AeroKernel;$(ProjectDir)../../../../lib/Chimera/Chimera/modules/sim;$(ProjectDir)../../../../lib/Chimera;$(ProjectDir)../../../../lib/sparsepp;$(ProjectDir)../../../../tst;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -104,6 +132,7 @@
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <AdditionalLibraryDirectories>$(BOOST_ROOT)/boost_1_68_0/stage/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -115,7 +144,7 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)../../../../AeroKernel;$(ProjectDir)../../../../lib/Chimera;$(ProjectDir)../../../../lib/sparsepp;$(ProjectDir)../../../../tst;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BOOST_ROOT)/boost_1_68_0;$(ProjectDir)../../../../AeroKernel;$(ProjectDir)../../../../lib/Chimera/Chimera/modules/sim;$(ProjectDir)../../../../lib/Chimera;$(ProjectDir)../../../../lib/sparsepp;$(ProjectDir)../../../../tst;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -123,6 +152,7 @@
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <AdditionalLibraryDirectories>$(BOOST_ROOT)/boost_1_68_0/stage/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

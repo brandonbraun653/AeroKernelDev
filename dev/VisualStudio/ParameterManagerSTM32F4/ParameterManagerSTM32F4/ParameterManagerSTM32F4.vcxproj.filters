@@ -139,9 +139,6 @@
     <Filter Include="MB85RS64V">
       <UniqueIdentifier>{c5b3003a-a591-4f45-9a42-d17a3a111009}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MB85RS64V\tests">
-      <UniqueIdentifier>{47e115cf-d10c-4ba1-b20b-ed200aadd1c9}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="stm32.props">
@@ -890,9 +887,6 @@
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\thor.cpp">
       <Filter>Thor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\lib\Thor\Thor\thor_allocator.cpp">
-      <Filter>Thor</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\thor_boost_stub.cpp">
       <Filter>Thor</Filter>
     </ClCompile>
@@ -959,11 +953,14 @@
     <ClCompile Include="..\..\..\..\lib\MB85RS64V\mb85rs64v.cpp">
       <Filter>MB85RS64V</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\lib\MB85RS64V\tests\mb85rs64v_tests_stm32f4.cpp">
-      <Filter>MB85RS64V\tests</Filter>
-    </ClCompile>
     <ClCompile Include="C:\Users\Valkyrie\AppData\Local\VisualGDB\EmbeddedEFPs\Profiler\ProfilerDriver_STM32_HAL.cpp">
       <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\tst\int\embedded\ParameterManager\F-RAM\fram_test.cpp">
+      <Filter>Tests\F-RAM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\lib\Chimera\Chimera\chimera_allocator.cpp">
+      <Filter>Chimera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1147,9 +1144,6 @@
     <ClInclude Include="..\..\..\..\lib\FreeRTOS\portable\GCC\ARM_CM4F\portmacro.h">
       <Filter>FreeRTOS\portable\GCC\ARM_CM4F</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\lib\Thor\Thor\allocator.hpp">
-      <Filter>Thor</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\lib\Thor\Thor\boostStub.hpp">
       <Filter>Thor</Filter>
     </ClInclude>
@@ -1281,6 +1275,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\lib\MB85RS64V\mb85rs64v.hpp">
       <Filter>MB85RS64V</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\allocator.hpp">
+      <Filter>Chimera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

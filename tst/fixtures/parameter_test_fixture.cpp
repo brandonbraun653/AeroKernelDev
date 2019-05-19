@@ -59,5 +59,5 @@ void PMTF::reset_test()
 
 bool PMTF::updateProc1( const std::string_view &key )
 {
-  return pm->write( key, &updateValue1, sizeof( updateValue1 ) );
+  return pm->write( key, &updateValue1 );
 }

@@ -27,7 +27,7 @@ int main(void)
   //InitializeSamplingProfiler();
   InitializeInstrumentingProfiler();
 
-  Chimera::Threading::addThread( testThread, "tt", 1000, NULL, 2, NULL );
+  Chimera::Threading::addThread( testThread, "tt", 10000, NULL, 2, NULL );
   Chimera::Threading::startScheduler();
   
   /* We should never hit this. The real exit is in the test thread. */

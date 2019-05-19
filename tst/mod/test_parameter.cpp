@@ -216,7 +216,7 @@ AeroKernel::Parameter::Manager::read()
 TEST_F( PMTF, readPreInitialization )
 {
   uint8_t someData = 0xaa;
-  EXPECT_EQ( false, pm->read( "idk", &someData, sizeof( someData ) ) );
+  EXPECT_EQ( false, pm->read( "idk", &someData ) );
 }
 
 TEST_F( PMTF, readInvalidKey )
@@ -224,7 +224,7 @@ TEST_F( PMTF, readInvalidKey )
   uint8_t someData = 0xaa;
 
   pm->init( 50 );
-  EXPECT_EQ( false, pm->read( "TotallyAValidKey...", &someData, sizeof( someData ) ) );
+  EXPECT_EQ( false, pm->read( "TotallyAValidKey...", &someData ) );
   EXPECT_EQ( someData, 0xaa );
 }
 
@@ -243,7 +243,7 @@ TEST_F( PMTF, readUnregisteredMemoryDriver )
 
   pm->init( 50 );
   pm->registerParameter( key, cfg );
-  EXPECT_EQ( false, pm->read( key, &pod, sizeof( pod ) ) );
+  EXPECT_EQ( false, pm->read( key, &pod ) );
   EXPECT_EQ( pod, 0x85 );
 }
 
@@ -266,9 +266,9 @@ TEST_F( PMTF, readPOD )
   pm->registerParameter( key, cfg );
   pm->registerMemoryDriver( Location::INTERNAL_FLASH, driver );
 
-  EXPECT_EQ( true, pm->write( key, &pod, sizeof( pod ) ) );
+  EXPECT_EQ( true, pm->write( key, &pod ) );
   pod = 0x00;
-  EXPECT_EQ( true, pm->read( key, &pod, sizeof( pod ) ) );
+  EXPECT_EQ( true, pm->read( key, &pod ) );
   EXPECT_EQ( pod, 0x85 );
 }
 
@@ -290,7 +290,7 @@ TEST_F( PMTF, readOutOfBounds )
   pm->init( 50 );
   pm->registerParameter( key, cfg );
   pm->registerMemoryDriver( Location::INTERNAL_FLASH, driver );
-  EXPECT_EQ( false, pm->read( key, &pod, sizeof( pod ) ) );
+  EXPECT_EQ( false, pm->read( key, &pod ) );
 }
 
 TEST_F( PMTF, readSizingDifferentThanRegistered )
@@ -312,7 +312,7 @@ TEST_F( PMTF, readSizingDifferentThanRegistered )
   pm->registerParameter( key, cfg );
   pm->registerMemoryDriver( Location::INTERNAL_FLASH, driver );
 
-  EXPECT_EQ( false, pm->read( key, &pod, cfg.size * 2 ) );
+  EXPECT_EQ( false, pm->read( key, &pod ) );
 }
 
 /*------------------------------------------------
@@ -321,7 +321,7 @@ AeroKernel::Parameter::Manager::write()
 TEST_F( PMTF, writePreInitialization )
 {
   uint8_t someData = 0xaa;
-  EXPECT_EQ( false, pm->write( "idk", &someData, sizeof( someData ) ) );
+  EXPECT_EQ( false, pm->write( "idk", &someData ) );
 }
 
 TEST_F( PMTF, writeInvalidKey )
@@ -329,7 +329,7 @@ TEST_F( PMTF, writeInvalidKey )
   uint8_t someData = 0xaa;
 
   pm->init( 50 );
-  EXPECT_EQ( false, pm->write( "TotallyAValidKey...", &someData, sizeof( someData ) ) );
+  EXPECT_EQ( false, pm->write( "TotallyAValidKey...", &someData ) );
 }
 
 TEST_F( PMTF, writeUnregisteredMemoryDriver )
@@ -347,7 +347,7 @@ TEST_F( PMTF, writeUnregisteredMemoryDriver )
 
   pm->init( 50 );
   pm->registerParameter( key, cfg );
-  EXPECT_EQ( false, pm->write( key, &pod, sizeof( pod ) ) );
+  EXPECT_EQ( false, pm->write( key, &pod ) );
 }
 
 TEST_F( PMTF, writePOD )
@@ -368,7 +368,7 @@ TEST_F( PMTF, writePOD )
   pm->init( 50 );
   pm->registerParameter( key, cfg );
   pm->registerMemoryDriver( Location::INTERNAL_FLASH, driver );
-  EXPECT_EQ( true, pm->write( key, &pod, sizeof( pod ) ) );
+  EXPECT_EQ( true, pm->write( key, &pod ) );
 }
 
 TEST_F( PMTF, writeOutOfBounds )
@@ -389,29 +389,7 @@ TEST_F( PMTF, writeOutOfBounds )
   pm->init( 50 );
   pm->registerParameter( key, cfg );
   pm->registerMemoryDriver( Location::INTERNAL_FLASH, driver );
-  EXPECT_EQ( false, pm->write( key, &pod, sizeof( pod ) ) );
-}
-
-TEST_F( PMTF, writeSizingDifferentThanRegistered )
-{
-  using namespace AeroKernel::Parameter;
-  using namespace Chimera::Modules::Memory;
-
-  uint8_t pod                = 0x85;
-  const std::string_view key = "pod";
-  ParamCtrlBlk cfg;
-  Device_sPtr driver = InternalFLASH_VMD;
-
-  cfg.address = std::numeric_limits<size_t>::max();
-  cfg.size    = sizeof( pod );
-  cfg.config  = Location::INTERNAL_FLASH;
-  cfg.update  = nullptr;
-
-  pm->init( 50 );
-  pm->registerParameter( key, cfg );
-  pm->registerMemoryDriver( Location::INTERNAL_FLASH, driver );
-
-  EXPECT_EQ( false, pm->write( key, &pod, cfg.size * 2 ) );
+  EXPECT_EQ( false, pm->write( key, &pod ) );
 }
 
 /*------------------------------------------------
@@ -475,6 +453,6 @@ TEST_F( PMTF, updateValidKeyWithRegisteredUpdateFunc )
 
   EXPECT_EQ( true, pm->update( key ) );
 
-  pm->read( key, &pod, sizeof( pod ) );
+  pm->read( key, &pod );
   EXPECT_EQ( pod, updateValue1 );
 }

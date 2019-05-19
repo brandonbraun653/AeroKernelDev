@@ -68,13 +68,12 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\AeroKernel\AeroKernel\parameter.cpp" />
+    <ClCompile Include="..\..\..\..\lib\Chimera\Chimera\chimera_allocator.cpp" />
     <ClCompile Include="..\..\..\..\lib\MB85RS64V\mb85rs64v.cpp" />
-    <ClCompile Include="..\..\..\..\lib\MB85RS64V\tests\mb85rs64v_tests_stm32f4.cpp" />
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\defaults\serial_defaults.cpp" />
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\defaults\spi_defaults.cpp" />
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\sram.cpp" />
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\thor.cpp" />
-    <ClCompile Include="..\..\..\..\lib\Thor\Thor\thor_allocator.cpp" />
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\thor_boost_stub.cpp" />
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\thor_core.cpp" />
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\thor_crc.cpp" />
@@ -92,6 +91,7 @@
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\thor_uart.cpp" />
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\thor_usart.cpp" />
     <ClCompile Include="..\..\..\..\lib\Thor\Thor\thor_watchdog.cpp" />
+    <ClCompile Include="..\..\..\..\tst\int\embedded\ParameterManager\F-RAM\fram_test.cpp" />
     <ClCompile Include="..\..\..\..\tst\int\embedded\ParameterManager\main.cpp" />
     <ClCompile Include="C:\Users\Valkyrie\AppData\Local\VisualGDB\EmbeddedEFPs\Profiler\ProfilerDriver_STM32_HAL.cpp" />
     <None Include="stm32.props" />
@@ -110,6 +110,7 @@
     <ClInclude Include="$(TESTFW_BASE_LOCAL)\com.sysprogs.unittest.tinyembtest\TinyEmbeddedTest.h" />
     <ClInclude Include="$(TESTFW_BASE_LOCAL)\com.sysprogs.unittest.tinyembtest\SysprogsTestHooks.h" />
     <ClInclude Include="..\..\..\..\AeroKernel\AeroKernel\parameter.hpp" />
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\allocator.hpp" />
     <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\buffer.hpp" />
     <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\chimera.hpp" />
     <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\crc.hpp" />
@@ -171,7 +172,6 @@
     <ClInclude Include="..\..\..\..\lib\FreeRTOS\include\timers.h" />
     <ClInclude Include="..\..\..\..\lib\FreeRTOS\portable\GCC\ARM_CM4F\portmacro.h" />
     <ClInclude Include="..\..\..\..\lib\MB85RS64V\mb85rs64v.hpp" />
-    <ClInclude Include="..\..\..\..\lib\Thor\Thor\allocator.hpp" />
     <ClInclude Include="..\..\..\..\lib\Thor\Thor\boostStub.hpp" />
     <ClInclude Include="..\..\..\..\lib\Thor\Thor\config.hpp" />
     <ClInclude Include="..\..\..\..\lib\Thor\Thor\config\chimera\chimeraPort.hpp" />
