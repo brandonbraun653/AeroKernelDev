@@ -38,8 +38,6 @@
   <MCUMakFile>stm32.mak</MCUMakFile>
   <ReferencedFrameworks>
     <string>com.sysprogs.embedded.semihosting_and_profiler</string>
-    <string>com.sysprogs.embedded.semihosting_and_profiler</string>
-    <string>com.sysprogs.embedded.semihosting_and_profiler</string>
   </ReferencedFrameworks>
   <FrameworkProperties>
     <Entries>

@@ -848,9 +848,6 @@
     <ClCompile Include="..\..\..\..\lib\Chimera\Chimera\chimera_threading.cpp">
       <Filter>Chimera</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\lib\Chimera\Chimera\modules\freertos\freertos_hooks_prj.cpp">
-      <Filter>Chimera\modules\freertos</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\lib\Chimera\Chimera\modules\memory\chimera_memory_device.cpp">
       <Filter>Chimera\modules\memory</Filter>
     </ClCompile>
@@ -962,6 +959,12 @@
     <ClCompile Include="..\..\..\..\lib\Chimera\Chimera\chimera_allocator.cpp">
       <Filter>Chimera</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\lib\Chimera\Chimera\modules\freertos\freertos_hooks.cpp">
+      <Filter>Chimera\modules\freertos</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\lib\Thor\Thor\config\freertos\freertos_hooks_prj.cpp">
+      <Filter>Thor\config\freertos</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\buffer.hpp">
@@ -1047,9 +1050,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\interface\watchdog_intf.hpp">
       <Filter>Chimera\interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\modules\freertos\freertos_hooks_prj.hpp">
-      <Filter>Chimera\modules\freertos</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\modules\memory\blockDevice.hpp">
       <Filter>Chimera\modules\memory</Filter>
@@ -1278,6 +1278,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\allocator.hpp">
       <Filter>Chimera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\lib\Chimera\Chimera\modules\freertos\freertos_hooks.hpp">
+      <Filter>Chimera\modules\freertos</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
