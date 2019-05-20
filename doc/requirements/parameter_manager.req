@@ -72,11 +72,6 @@
           <description>ExternalSRAM2: 111</description>
         </req>
       </req>
-      <req>
-        <number>PM002.2.3</number>
-        <R>false</R>
-        <description></description>
-      </req>
     </req>
     <req>
       <number>PM002.3</number>
@@ -87,6 +82,10 @@
   <req>
     <number>PM003</number>
     <description>The system shall provide a method to determine if a parameter is registered</description>
+  </req>
+  <req>
+    <number>PM012</number>
+    <description>The system shall provide a method for retreiving meta information associated with a registered parameter</description>
   </req>
   <header>
     <headerTitle>Data Access</headerTitle>
@@ -102,17 +101,13 @@
       <number>PM006</number>
       <description>The system shall provide a method for atomically removing a registered parameter</description>
     </req>
+    <req>
+      <number>PM0011</number>
+      <description>The system shall provide a method for atomically updating a registered parameter</description>
+    </req>
   </header>
   <header>
     <headerTitle>Memory Management<headerTitle>
-    <req>
-      <number>PM007</number>
-      <description>The system shall be initialized from static memory</description>
-    </req>
-    <req>
-      <number>PM008</number>
-      <description>The system shall provide a method for determining at runtime the amount of memory remaining in a given storage region</description>
-    </req>
     <req>
       <number>PM009</number>
       <description>The system shall be initialized with information regarding accessable memory</description>
@@ -121,18 +116,6 @@
       <number>PM010</number>
       <description>The system shall be capable of registering and unregistering low level memory storage access functions</description>
     </req>
-    <req>
-      <number>PM011</number>
-      <description>The system shall align memory according to a specific block size</description>
-      <req>
-        <number>PM011.1</number>
-        <R>true</R>
-        <description>If a parameter exceeds the allocated block size, it will consume the entire next block</description>
-      </req><req>
-        <number>PM011.2</number>
-        <R>true</R>
-        <description>Parameter blocks shall be tracked with a header data structure</description>
-      </req>
-    </req>
   </header>
+
 </ParameterManager>
