@@ -27,11 +27,15 @@ TEST_F( PMTF, RegistrationNormal )
   using namespace AeroKernel::Parameter;
 
   const std::string_view key = "helloWorld";
-  ParamCtrlBlk ctrlBlk       = { 0, 0, 0, nullptr };
+  ControlBlockFactory factory;
+  factory.setAddress( 0 );
+  factory.setSize( 0 );
+  factory.setStorage( StorageType::INTERNAL_SRAM );
+  factory.setUpdateCallback( nullptr );
 
   pm->init( 50 );
 
-  EXPECT_EQ( true, pm->registerParameter( key, ctrlBlk ) );
+  EXPECT_EQ( true, pm->registerParameter( key, factory.build() ) );
 }
 
 TEST_F( PMTF, RegistrationOverwrite )
@@ -39,8 +43,19 @@ TEST_F( PMTF, RegistrationOverwrite )
   using namespace AeroKernel::Parameter;
 
   const std::string_view key = "helloWorld";
-  ParamCtrlBlk ctrlBlk1      = { 0, 0, 0, nullptr };
-  ParamCtrlBlk ctrlBlk2      = { 1, 2, 3, nullptr };
+
+  ControlBlockFactory factory;
+  factory.setAddress( 0 );
+  factory.setSize( 0 );
+  factory.setStorage( StorageType::INTERNAL_SRAM );
+  factory.setUpdateCallback( nullptr );
+  ControlBlock ctrlBlk1 = factory.build();
+
+  factory.setAddress( 1 );
+  factory.setSize( 2 );
+  factory.setStorage( StorageType::INTERNAL_FLASH );
+  factory.setUpdateCallback( nullptr );
+  ControlBlock ctrlBlk2 = factory.build();
 
   pm->init( 50 );
 
@@ -50,10 +65,9 @@ TEST_F( PMTF, RegistrationOverwrite )
   pm->registerParameter( key, ctrlBlk1 );
   auto storedResult = pm->getControlBlock( key );
 
-  /* Cannot memcmp due to implementation details */
-  EXPECT_EQ( ctrlBlk1.address, storedResult.address );
-  EXPECT_EQ( ctrlBlk1.config, storedResult.config );
-  EXPECT_EQ( ctrlBlk1.size, storedResult.size );
+  EXPECT_EQ( ControlBlockInterpreter::getAddress( ctrlBlk1 ), ControlBlockInterpreter::getAddress( storedResult ) );
+  EXPECT_EQ( ControlBlockInterpreter::getStorage( ctrlBlk1 ), ControlBlockInterpreter::getStorage( storedResult ) );
+  EXPECT_EQ( ControlBlockInterpreter::getSize( ctrlBlk1 ), ControlBlockInterpreter::getSize( storedResult ) );
 
   /*------------------------------------------------
   Re-register the key and write the second control block
@@ -61,17 +75,16 @@ TEST_F( PMTF, RegistrationOverwrite )
   pm->registerParameter( key, ctrlBlk2 );
   storedResult = pm->getControlBlock( key );
   
-  /* Cannot memcmp due to implementation details */
-  EXPECT_EQ( ctrlBlk2.address, storedResult.address );
-  EXPECT_EQ( ctrlBlk2.config, storedResult.config );
-  EXPECT_EQ( ctrlBlk2.size, storedResult.size );
+  EXPECT_EQ( ControlBlockInterpreter::getAddress( ctrlBlk2 ), ControlBlockInterpreter::getAddress( storedResult ) );
+  EXPECT_EQ( ControlBlockInterpreter::getStorage( ctrlBlk2 ), ControlBlockInterpreter::getStorage( storedResult ) );
+  EXPECT_EQ( ControlBlockInterpreter::getSize( ctrlBlk2 ), ControlBlockInterpreter::getSize( storedResult ) );
 
   /*------------------------------------------------
   Make sure the current control block does not equal the first
   ------------------------------------------------*/
-  EXPECT_NE( ctrlBlk1.address, storedResult.address );
-  EXPECT_NE( ctrlBlk1.config, storedResult.config );
-  EXPECT_NE( ctrlBlk1.size, storedResult.size );
+  EXPECT_NE( ControlBlockInterpreter::getAddress( ctrlBlk1 ), ControlBlockInterpreter::getAddress( storedResult ) );
+  EXPECT_NE( ControlBlockInterpreter::getStorage( ctrlBlk1 ), ControlBlockInterpreter::getStorage( storedResult ) );
+  EXPECT_NE( ControlBlockInterpreter::getSize( ctrlBlk1 ), ControlBlockInterpreter::getSize( storedResult ) );
 }
 
 TEST_F( PMTF, RegistrationBeforeInit )
@@ -79,8 +92,14 @@ TEST_F( PMTF, RegistrationBeforeInit )
   using namespace AeroKernel::Parameter;
 
   const std::string_view key = "helloWorld";
-  ParamCtrlBlk ctrlBlk       = { 0, 0, 0, nullptr };
-  EXPECT_EQ( false, pm->registerParameter( key, ctrlBlk ) );
+
+  ControlBlockFactory factory;
+  factory.setAddress( 0 );
+  factory.setSize( 0 );
+  factory.setStorage( StorageType::INTERNAL_SRAM );
+  factory.setUpdateCallback( nullptr );
+
+  EXPECT_EQ( false, pm->registerParameter( key, factory.build() ) );
 }
 
 /*------------------------------------------------
@@ -91,10 +110,14 @@ TEST_F( PMTF, UnRegisterNormal )
   using namespace AeroKernel::Parameter;
 
   const std::string_view key = "IAmGroot";
-  ParamCtrlBlk pcb           = { 0, 0, 0, nullptr };
+  ControlBlockFactory factory;
+  factory.setAddress( 0 );
+  factory.setSize( 0 );
+  factory.setStorage( StorageType::INTERNAL_SRAM );
+  factory.setUpdateCallback( nullptr );
 
   pm->init( 50 );
-  pm->registerParameter( key, pcb );
+  pm->registerParameter( key, factory.build() );
   ASSERT_EQ( true, pm->isRegistered( key ) );
   EXPECT_EQ( true, pm->unregisterParameter( key ) );
 }
@@ -121,12 +144,16 @@ TEST_F( PMTF, isRegistered )
   using namespace AeroKernel::Parameter;
 
   const std::string_view key = "testing123";
-  ParamCtrlBlk ctrlBlk       = { 0, 0, 0, nullptr };
+  ControlBlockFactory factory;
+  factory.setAddress( 0 );
+  factory.setSize( 0 );
+  factory.setStorage( StorageType::INTERNAL_SRAM );
+  factory.setUpdateCallback( nullptr );
 
   pm->init( 50 );
 
   EXPECT_EQ( false, pm->isRegistered( key ) );
-  pm->registerParameter( key, ctrlBlk );
+  pm->registerParameter( key, factory.build() );
   EXPECT_EQ( true, pm->isRegistered( key ) );
 }
 
@@ -135,17 +162,21 @@ TEST_F( PMTF, isRegisteredPreInitialization )
   using namespace AeroKernel::Parameter;
 
   const std::string_view key = "testing123";
-  ParamCtrlBlk ctrlBlk       = { 0, 0, 0, nullptr };
+  ControlBlockFactory factory;
+  factory.setAddress( 0 );
+  factory.setSize( 0 );
+  factory.setStorage( StorageType::INTERNAL_SRAM );
+  factory.setUpdateCallback( nullptr );
 
   EXPECT_EQ( false, pm->isRegistered( key ) );
-  pm->registerParameter( key, ctrlBlk );
+  pm->registerParameter( key, factory.build() );
   EXPECT_EQ( false, pm->isRegistered( key ) );
 }
 
 /*------------------------------------------------
 AeroKernel::Parameter::Manager::registerMemoryDriver()
 ------------------------------------------------*/
-TEST_F( PMTF, registerMemoryDriver_invalidLocation )
+TEST_F( PMTF, registerMemoryDriver_invalidStorageType )
 {
   using namespace AeroKernel::Parameter;
   using namespace Chimera::Modules::Memory;
@@ -153,10 +184,10 @@ TEST_F( PMTF, registerMemoryDriver_invalidLocation )
   Device_sPtr device = InternalSRAM_VMD;
 
   pm->init( 50 );
-  EXPECT_EQ( false, pm->registerMemoryDriver( Location::MAX_MEMORY_LOCATIONS, device ) );
+  EXPECT_EQ( false, pm->registerMemoryDriver( StorageType::NONE, device ) );
 }
 
-TEST_F( PMTF, registerMemoryDriver_validLocation )
+TEST_F( PMTF, registerMemoryDriver_validStorageType )
 {
   using namespace AeroKernel::Parameter;
   using namespace Chimera::Modules::Memory;
@@ -164,7 +195,7 @@ TEST_F( PMTF, registerMemoryDriver_validLocation )
   Device_sPtr device = InternalSRAM_VMD;
 
   pm->init( 50 );
-  EXPECT_EQ( true, pm->registerMemoryDriver( Location::INTERNAL_SRAM, device ) );
+  EXPECT_EQ( true, pm->registerMemoryDriver( StorageType::INTERNAL_SRAM, device ) );
 }
 
 TEST_F( PMTF, registerMemoryDriver_preInitialization )
@@ -173,13 +204,13 @@ TEST_F( PMTF, registerMemoryDriver_preInitialization )
   using namespace Chimera::Modules::Memory;
 
   Device_sPtr device = InternalSRAM_VMD;
-  EXPECT_EQ( false, pm->registerMemoryDriver( Location::INTERNAL_SRAM, device ) );
+  EXPECT_EQ( false, pm->registerMemoryDriver( StorageType::INTERNAL_SRAM, device ) );
 }
 
 /*------------------------------------------------
 AeroKernel::Parameter::Manager::registerMemorySpecs()
 ------------------------------------------------*/
-TEST_F( PMTF, registerMemorySpecs_invalidLocation )
+TEST_F( PMTF, registerMemorySpecs_invalidStorageType )
 {
   using namespace AeroKernel::Parameter;
   using namespace Chimera::Modules::Memory;
@@ -187,10 +218,10 @@ TEST_F( PMTF, registerMemorySpecs_invalidLocation )
   Device_sPtr device = InternalSRAM_VMD;
 
   pm->init( 50 );
-  EXPECT_EQ( false, pm->registerMemorySpecs( Location::MAX_MEMORY_LOCATIONS, InternalSRAM_VMD->getSpecs() ) );
+  EXPECT_EQ( false, pm->registerMemorySpecs( StorageType::NONE, InternalSRAM_VMD->getSpecs() ) );
 }
 
-TEST_F( PMTF, registerMemorySpecs_validLocation )
+TEST_F( PMTF, registerMemorySpecs_validStorageType )
 {
   using namespace AeroKernel::Parameter;
   using namespace Chimera::Modules::Memory;
@@ -198,7 +229,7 @@ TEST_F( PMTF, registerMemorySpecs_validLocation )
   Device_sPtr device = InternalSRAM_VMD;
 
   pm->init( 50 );
-  EXPECT_EQ( true, pm->registerMemorySpecs( Location::EXTERNAL_SRAM0, InternalSRAM_VMD->getSpecs() ) );
+  EXPECT_EQ( true, pm->registerMemorySpecs( StorageType::EXTERNAL_SRAM0, InternalSRAM_VMD->getSpecs() ) );
 }
 
 TEST_F( PMTF, registerMemorySpecs_preInitialization )
@@ -207,7 +238,7 @@ TEST_F( PMTF, registerMemorySpecs_preInitialization )
   using namespace Chimera::Modules::Memory;
 
   Device_sPtr device = InternalSRAM_VMD;
-  EXPECT_EQ( false, pm->registerMemorySpecs( Location::EXTERNAL_SRAM0, InternalSRAM_VMD->getSpecs() ) );
+  EXPECT_EQ( false, pm->registerMemorySpecs( StorageType::EXTERNAL_SRAM0, InternalSRAM_VMD->getSpecs() ) );
 }
 
 /*------------------------------------------------
@@ -234,15 +265,14 @@ TEST_F( PMTF, readUnregisteredMemoryDriver )
 
   uint8_t pod                = 0x85;
   const std::string_view key = "pod";
-  ParamCtrlBlk cfg;
-
-  cfg.address = 0x400;
-  cfg.size    = sizeof( pod );
-  cfg.config  = Location::INTERNAL_FLASH;
-  cfg.update  = nullptr;
+  ControlBlockFactory factory;
+  factory.setAddress( 0x400 );
+  factory.setSize( sizeof(pod) );
+  factory.setStorage( StorageType::INTERNAL_FLASH );
+  factory.setUpdateCallback( nullptr );
 
   pm->init( 50 );
-  pm->registerParameter( key, cfg );
+  pm->registerParameter( key, factory.build() );
   EXPECT_EQ( false, pm->read( key, &pod ) );
   EXPECT_EQ( pod, 0x85 );
 }
@@ -254,17 +284,17 @@ TEST_F( PMTF, readPOD )
 
   uint8_t pod                = 0x85;
   const std::string_view key = "a_cool_key";
-  ParamCtrlBlk cfg;
   Device_sPtr driver = InternalFLASH_VMD;
 
-  cfg.address = 0x100;
-  cfg.size    = sizeof( pod );
-  cfg.config  = Location::INTERNAL_FLASH;
-  cfg.update  = nullptr;
+  ControlBlockFactory factory;
+  factory.setAddress( 0x100 );
+  factory.setSize( sizeof( pod ) );
+  factory.setStorage( StorageType::INTERNAL_FLASH );
+  factory.setUpdateCallback( nullptr );
 
   pm->init( 50 );
-  pm->registerParameter( key, cfg );
-  pm->registerMemoryDriver( Location::INTERNAL_FLASH, driver );
+  pm->registerParameter( key, factory.build() );
+  pm->registerMemoryDriver( StorageType::INTERNAL_FLASH, driver );
 
   EXPECT_EQ( true, pm->write( key, &pod ) );
   pod = 0x00;
@@ -279,39 +309,17 @@ TEST_F( PMTF, readOutOfBounds )
 
   uint8_t pod                = 0x85;
   const std::string_view key = "pod";
-  ParamCtrlBlk cfg;
   Device_sPtr driver = InternalFLASH_VMD;
 
-  cfg.address = std::numeric_limits<size_t>::max();
-  cfg.size    = sizeof( pod );
-  cfg.config  = Location::INTERNAL_FLASH;
-  cfg.update  = nullptr;
+  ControlBlockFactory factory;
+  factory.setAddress( std::numeric_limits<size_t>::max() );
+  factory.setSize( sizeof( pod ) );
+  factory.setStorage( StorageType::INTERNAL_FLASH );
+  factory.setUpdateCallback( nullptr );
 
   pm->init( 50 );
-  pm->registerParameter( key, cfg );
-  pm->registerMemoryDriver( Location::INTERNAL_FLASH, driver );
-  EXPECT_EQ( false, pm->read( key, &pod ) );
-}
-
-TEST_F( PMTF, readSizingDifferentThanRegistered )
-{
-  using namespace AeroKernel::Parameter;
-  using namespace Chimera::Modules::Memory;
-
-  uint8_t pod                = 0x85;
-  const std::string_view key = "pod";
-  ParamCtrlBlk cfg;
-  Device_sPtr driver = InternalFLASH_VMD;
-
-  cfg.address = std::numeric_limits<size_t>::max();
-  cfg.size    = sizeof( pod );
-  cfg.config  = Location::INTERNAL_FLASH;
-  cfg.update  = nullptr;
-
-  pm->init( 50 );
-  pm->registerParameter( key, cfg );
-  pm->registerMemoryDriver( Location::INTERNAL_FLASH, driver );
-
+  pm->registerParameter( key, factory.build() );
+  pm->registerMemoryDriver( StorageType::INTERNAL_FLASH, driver );
   EXPECT_EQ( false, pm->read( key, &pod ) );
 }
 
@@ -338,15 +346,15 @@ TEST_F( PMTF, writeUnregisteredMemoryDriver )
 
   uint8_t pod                = 0x85;
   const std::string_view key = "pod";
-  ParamCtrlBlk cfg;
 
-  cfg.address = 0x100;
-  cfg.size    = sizeof( pod );
-  cfg.config  = Location::INTERNAL_FLASH;
-  cfg.update  = nullptr;
+  ControlBlockFactory factory;
+  factory.setAddress( 0x100 );
+  factory.setSize( sizeof( pod ) );
+  factory.setStorage( StorageType::INTERNAL_FLASH );
+  factory.setUpdateCallback( nullptr );
 
   pm->init( 50 );
-  pm->registerParameter( key, cfg );
+  pm->registerParameter( key, factory.build() );
   EXPECT_EQ( false, pm->write( key, &pod ) );
 }
 
@@ -357,17 +365,17 @@ TEST_F( PMTF, writePOD )
 
   uint8_t pod                = 0x85;
   const std::string_view key = "pod";
-  ParamCtrlBlk cfg;
   Device_sPtr driver = InternalFLASH_VMD;
 
-  cfg.address = 0x100;
-  cfg.size    = sizeof( pod );
-  cfg.config  = Location::INTERNAL_FLASH;
-  cfg.update  = nullptr;
+  ControlBlockFactory factory;
+  factory.setAddress( 0x100 );
+  factory.setSize( sizeof( pod ) );
+  factory.setStorage( StorageType::INTERNAL_FLASH );
+  factory.setUpdateCallback( nullptr );
 
   pm->init( 50 );
-  pm->registerParameter( key, cfg );
-  pm->registerMemoryDriver( Location::INTERNAL_FLASH, driver );
+  pm->registerParameter( key, factory.build() );
+  pm->registerMemoryDriver( StorageType::INTERNAL_FLASH, driver );
   EXPECT_EQ( true, pm->write( key, &pod ) );
 }
 
@@ -378,17 +386,17 @@ TEST_F( PMTF, writeOutOfBounds )
 
   uint8_t pod                = 0x85;
   const std::string_view key = "pod";
-  ParamCtrlBlk cfg;
   Device_sPtr driver = InternalFLASH_VMD;
 
-  cfg.address = std::numeric_limits<size_t>::max();
-  cfg.size    = sizeof( pod );
-  cfg.config  = Location::INTERNAL_FLASH;
-  cfg.update  = nullptr;
+  ControlBlockFactory factory;
+  factory.setAddress( std::numeric_limits<size_t>::max() );
+  factory.setSize( sizeof( pod ) );
+  factory.setStorage( StorageType::INTERNAL_FLASH );
+  factory.setUpdateCallback( nullptr );
 
   pm->init( 50 );
-  pm->registerParameter( key, cfg );
-  pm->registerMemoryDriver( Location::INTERNAL_FLASH, driver );
+  pm->registerParameter( key, factory.build() );
+  pm->registerMemoryDriver( StorageType::INTERNAL_FLASH, driver );
   EXPECT_EQ( false, pm->write( key, &pod ) );
 }
 
@@ -415,17 +423,17 @@ TEST_F( PMTF, updateValidKeyNoRegisteredUpdateFunc )
 
   uint8_t pod                = 0x85;
   const std::string_view key = "pod";
-  ParamCtrlBlk cfg;
   Device_sPtr driver = InternalFLASH_VMD;
 
-  cfg.address = 0x100;
-  cfg.size    = sizeof( pod );
-  cfg.config  = Location::INTERNAL_FLASH;
-  cfg.update  = nullptr;
+  ControlBlockFactory factory;
+  factory.setAddress( 0x100 );
+  factory.setSize( sizeof( pod ) );
+  factory.setStorage( StorageType::INTERNAL_FLASH );
+  factory.setUpdateCallback( nullptr );
 
   pm->init( 50 );
-  pm->registerParameter( key, cfg );
-  pm->registerMemoryDriver( Location::INTERNAL_FLASH, driver );
+  pm->registerParameter( key, factory.build() );
+  pm->registerMemoryDriver( StorageType::INTERNAL_FLASH, driver );
 
   EXPECT_EQ( false, pm->update( key ) );
   EXPECT_EQ( pod, 0x85 );
@@ -439,17 +447,17 @@ TEST_F( PMTF, updateValidKeyWithRegisteredUpdateFunc )
 
   uint8_t pod                = 0x85;
   const std::string_view key = "pod";
-  ParamCtrlBlk cfg;
   Device_sPtr driver = InternalFLASH_VMD;
 
-  cfg.address = 0x100;
-  cfg.size    = sizeof( pod );
-  cfg.config  = Location::INTERNAL_FLASH;
-  cfg.update  = std::bind(&PMTF::updateProc1, this, _1);
-
+  ControlBlockFactory factory;
+  factory.setAddress( 0x100 );
+  factory.setSize( sizeof( pod ) );
+  factory.setStorage( StorageType::INTERNAL_FLASH );
+  factory.setUpdateCallback( std::bind(&PMTF::updateProc1, this, _1) );
+  
   pm->init( 50 );
-  pm->registerParameter( key, cfg );
-  pm->registerMemoryDriver( Location::INTERNAL_FLASH, driver );
+  pm->registerParameter( key, factory.build() );
+  pm->registerMemoryDriver( StorageType::INTERNAL_FLASH, driver );
 
   EXPECT_EQ( true, pm->update( key ) );
 
