@@ -1,9 +1,13 @@
+import os ;
 import option ;
 import toolset ;
 
-using msvc ;
+if [ os.name ] in NT
+{
+    using msvc ;
 
-toolset.flags msvc.compile CFLAGS <variant>debug : "/DEBUG" : unchecked ;
-option.set keep-going : false ;
+    toolset.flags msvc.compile CFLAGS <variant>debug : "/DEBUG" : unchecked ;
+    option.set keep-going : false ;
+}
 
 using gcc ;

@@ -35,12 +35,18 @@ exe AeroKernelTests
 # -----------------------------------------------
 # Target that will execute the tests
 # -----------------------------------------------
-explicit_alias tests : RunTests ;
+explicit_alias tests : RunTests : : <toolset>gcc ;
     
 # -----------------------------------------------
 # Target that will generate the coverage report
 # -----------------------------------------------
 explicit_alias coverage : CovReports : : <toolset>gcc <variant>debug ;
+
+# -----------------------------------------------
+# Target that will run valgrind on the tests.
+# Only applicable in a linux environment.
+# -----------------------------------------------
+explicit_alias valgrind : RunValgrindOnTests : : <toolset>gcc ; 
 
 # -----------------------------------------------
 # Build the coverage report from coverage files, both XML and HTML format
@@ -62,6 +68,15 @@ actions run_tests
 {
     echo Running $(>)
     $(>)
+}
+
+# -----------------------------------------------
+# Run the executable with valgrind
+# -----------------------------------------------
+make RunValgrindOnTests : TestExecutable : @run_valgrind ;
+actions run_valgrind
+{
+    valgrind --leak-check=yes --track-origins=yes $(>)
 }
 
 # -----------------------------------------------
